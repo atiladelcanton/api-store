@@ -35,7 +35,12 @@ const productSchema = new Schema({
     tags: [{
         type: String,
         required: true
-    }]
+    }],
+    image: {
+        type: String,
+        required: true,
+        trim: true
+    },
 }, { timestamps: true });
 
 module.exports = mongoose.model('Product', productSchema);
