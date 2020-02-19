@@ -16,6 +16,7 @@
     "fs": "0.0.1-security",
     "guid": "0.0.12",
     "http": "0.0.0",
+    "jsonwebtoken": "^7.4.0",
     "md5": "^2.2.1",
     "mime": "^2.4.4",
     "mongoose": "^5.9.1",

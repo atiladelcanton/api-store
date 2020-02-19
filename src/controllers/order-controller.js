@@ -3,6 +3,8 @@
 const repository = require('../repositories/order-repository');
 const orderValidator = require('../requests/order-store');
 const guid = require('guid');
+const authService = require('../services/auth-service');
+
 exports.get = async (req, res, next) => {
     try {
 
@@ -15,18 +17,20 @@ exports.get = async (req, res, next) => {
 exports.post = async (req, res, next) => {
 
     try {
-        console.log(req.body);
+
+        const data = await authService.decodeToken(req);
+        console.log(data);
         await repository.create({
-            customer: req.body.customer,
+            customer: data.id,
             order_number: guid.raw().substring(0, 8),
             items: req.body.items
         });
         res.status(200).send({ message: 'Ordem cadastrada com sucesso!' });
     } catch (e) {
+        console.log(e)
         res.status(500).send({ message: 'Falha ao processar sua requisição', error: e });
     }
 }
-
 
 exports.delete = async (req, res, next) => {
     try {
